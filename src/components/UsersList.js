@@ -13,19 +13,15 @@ class UsersList extends Component {
     render() {
         return (
             <div>
-                <div>
-                    {this.props.usersData ?
-                        this.props.usersData.name.first
-                        :
-                        'Nie załadowano imienia!'
-                    }
-
-                    {this.props.usersData ?
-                        this.props.usersData.name.last
-                        :
-                        'Nie załadowano nazwiska!'
-                    }
-                </div>
+                {
+                    this.props.usersData
+                    &&
+                    this.props.usersData.map((el)=>(
+                        <div key={el.id}>
+                            {el.id}. {el.name} [nick: {el.username}]
+                        </div>
+                    ))
+                }
             </div>
         )
     }

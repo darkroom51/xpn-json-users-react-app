@@ -9,10 +9,10 @@ const setUsers = (users) => ({
 
 export const fetchUsers = () => (dispatch, getState) => {
     setTimeout( // this is only to slowly show "Ładowanie..."
-        () => fetch('https://randomuser.me/api')
+        () => fetch('http://jsonplaceholder.typicode.com/users')
             .then(response => response.json())
             .then(data => {
-                dispatch(setUsers(data.results[0]))
+                dispatch(setUsers(data))
             })
             .catch(err => {
                 console.log(err)
