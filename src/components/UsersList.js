@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom'
 
 import {connect} from 'react-redux'
 import {fetchUsers} from "../state/users";
 
 class UsersList extends Component {
-    state={}
+    state = {}
 
     componentWillMount() {
         this.props.getUsersData()
@@ -16,10 +17,12 @@ class UsersList extends Component {
                 {
                     this.props.usersData
                     &&
-                    this.props.usersData.map((el)=>(
-                        <div key={el.id}>
-                            {el.id}. {el.name} [nick: {el.username}]
-                        </div>
+                    this.props.usersData.map((el) => (
+                        <Link to={`/users-details/${el.id}`}  key={el.id}>
+                            <div style={{margin: '10px', padding: '10px'}}>
+                                {el.id}. {el.name} [nick: {el.username}]
+                            </div>
+                        </Link>
                     ))
                 }
             </div>
