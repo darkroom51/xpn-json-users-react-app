@@ -10,8 +10,7 @@ import {fetchUsers} from "../state/users";
 class UsersUpdate extends Component {
     state = {
         uid : this.props.match.params.uid,
-        msg : '',
-        userObj : {}
+        msg : ''
     }
 
 
@@ -23,14 +22,14 @@ class UsersUpdate extends Component {
         this.props.usersData
             .filter(el => +this.state.uid === el.id)
             .map(el=>(
-                this.setState({userObj: {
+                this.setState({
                         id: el.id,
                         name: el.name,
                         username: el.username,
                         email: el.email,
                         phone: el.phone,
                         website: el.website
-                    }})
+                    })
             ))
     }
 
@@ -47,11 +46,11 @@ class UsersUpdate extends Component {
             .then(() => this.setState({msg:'User has been updated successfully'}))
     }
 
-    handleNameChange = (e) => this.setState({userObj: { name: e.target.value }})
-    handleUsernameChange = (e) => this.setState({userObj: { username: e.target.value }})
-    handleEmailChange = (e) => this.setState({userObj: { email: e.target.value }})
-    handlePhoneChange = (e) => this.setState({userObj: { phone: e.target.value }})
-    handleWebsiteChange = (e) => this.setState({userObj: { website: e.target.value }})
+    handleNameChange = (e) => this.setState({ name: e.target.value })
+    handleUsernameChange = (e) => this.setState({ username: e.target.value })
+    handleEmailChange = (e) => this.setState({ email: e.target.value })
+    handlePhoneChange = (e) => this.setState({ phone: e.target.value })
+    handleWebsiteChange = (e) => this.setState({ website: e.target.value })
 
     render() {
         return (
@@ -59,12 +58,12 @@ class UsersUpdate extends Component {
 
                 <h2>Update User</h2>
                 <div>
-                    <p>id: <input type="text" value={this.state.userObj.id} disabled={true} readOnly={true}/></p>
-                    <p>name: <input type="text" onChange={this.handleNameChange} value={this.state.userObj.name}/></p>
-                    <p>username: <input type="text" onChange={this.handleUsernameChange} value={this.state.userObj.username}/></p>
-                    <p>email: <input type="text" onChange={this.handleEmailChange} value={this.state.userObj.email}/></p>
-                    <p>phone: <input type="text" onChange={this.handlePhoneChange} value={this.state.userObj.phone}/></p>
-                    <p>website: <input type="text" onChange={this.handleWebsiteChange} value={this.state.userObj.website}/></p>
+                    <p>id: <input type="text" value={this.state.id} disabled={true} readOnly={true}/></p>
+                    <p>name: <input type="text" onChange={this.handleNameChange} value={this.state.name}/></p>
+                    <p>username: <input type="text" onChange={this.handleUsernameChange} value={this.state.username}/></p>
+                    <p>email: <input type="text" onChange={this.handleEmailChange} value={this.state.email}/></p>
+                    <p>phone: <input type="text" onChange={this.handlePhoneChange} value={this.state.phone}/></p>
+                    <p>website: <input type="text" onChange={this.handleWebsiteChange} value={this.state.website}/></p>
                 </div>
 
                 <div>
