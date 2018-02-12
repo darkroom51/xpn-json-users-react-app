@@ -17,8 +17,9 @@ class UsersDetails extends Component {
     deleteHandler = (id) => {
         fetch(`https://jsonplaceholder.typicode.com/users/${id}`,
             {method: 'DELETE'})
+            .then(response => response.json())
+            .then(json => console.log(json))
             .then(() => this.setState({msg:'User has been deleted successfully'}))
-            .catch((err) => this.setState({msg:'Error while deleting user'}))
     }
 
     render() {
@@ -45,7 +46,7 @@ class UsersDetails extends Component {
                 }
                 <div>
                     <Link to={`/users-update/${this.state.uid}`}>
-                        <button>Update User</button>
+                        <button>Edit User</button>
                     </Link>
                     <button onClick={()=>this.deleteHandler(this.state.uid)}>Delete User</button>
                 </div>

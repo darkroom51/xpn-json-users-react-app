@@ -7,10 +7,10 @@ import {fetchUsers} from "../state/users";
 class UsersList extends Component {
     state = {}
 
+
     componentWillMount() {
         this.props.getUsersData()
     }
-
 
 
     render() {
