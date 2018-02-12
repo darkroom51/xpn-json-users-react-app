@@ -5,12 +5,10 @@ import {connect} from 'react-redux'
 import {fetchUsers} from "../state/users";
 
 
-
-
 class UsersUpdate extends Component {
     state = {
-        uid : this.props.match.params.uid,
-        msg : ''
+        uid: this.props.match.params.uid,
+        msg: ''
     }
 
 
@@ -21,36 +19,45 @@ class UsersUpdate extends Component {
         &&
         this.props.usersData
             .filter(el => +this.state.uid === el.id)
-            .map(el=>(
+            .map(el => (
                 this.setState({
-                        id: el.id,
-                        name: el.name,
-                        username: el.username,
-                        email: el.email,
-                        phone: el.phone,
-                        website: el.website
-                    })
+                    id: el.id,
+                    name: el.name,
+                    username: el.username,
+                    email: el.email,
+                    phone: el.phone,
+                    website: el.website
+                })
             ))
     }
 
     updateHandler = (id) => {
+        const userObj = {
+            id: this.state.name,
+            name: this.state.name,
+            username: this.state.username,
+            email: this.state.email,
+            phone: this.state.phone,
+            website: this.state.website
+        }
         fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
             method: 'PATCH',
-            body: JSON.stringify(this.state.userObj),
+            body: JSON.stringify(userObj),
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             }
         })
             .then(response => response.json())
             .then(json => console.log(json))
-            .then(() => this.setState({msg:'User has been updated successfully'}))
+            .then(() => this.setState({msg: 'User has been updated successfully'}))
     }
 
-    handleNameChange = (e) => this.setState({ name: e.target.value })
-    handleUsernameChange = (e) => this.setState({ username: e.target.value })
-    handleEmailChange = (e) => this.setState({ email: e.target.value })
-    handlePhoneChange = (e) => this.setState({ phone: e.target.value })
-    handleWebsiteChange = (e) => this.setState({ website: e.target.value })
+    handleNameChange = (e) => this.setState({name: e.target.value})
+    handleUsernameChange = (e) => this.setState({username: e.target.value})
+    handleEmailChange = (e) => this.setState({email: e.target.value})
+    handlePhoneChange = (e) => this.setState({phone: e.target.value})
+    handleWebsiteChange = (e) => this.setState({website: e.target.value})
+
 
     render() {
         return (
@@ -67,7 +74,7 @@ class UsersUpdate extends Component {
                 </div>
 
                 <div>
-                    <button onClick={()=>this.updateHandler(this.state.uid)}>Update User</button>
+                    <button onClick={() => this.updateHandler(this.state.uid)}>Update User</button>
                 </div>
                 <div>
                     <Link to={`/users-details/${this.state.uid}`}>

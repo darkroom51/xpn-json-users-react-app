@@ -5,8 +5,6 @@ import {connect} from 'react-redux'
 import {fetchUsers} from "../state/users";
 
 
-
-
 class UsersAdd extends Component {
     state = {
         msg: '',
@@ -19,7 +17,8 @@ class UsersAdd extends Component {
     }
 
 
-    componentWillMount() {}
+    componentWillMount() {
+    }
 
     addHandler = (id) => {
         const userObj = {
@@ -29,7 +28,6 @@ class UsersAdd extends Component {
             phone: this.state.phone,
             website: this.state.website
         }
-
         fetch('https://jsonplaceholder.typicode.com/users', {
             method: 'POST',
             body: JSON.stringify(userObj),
@@ -39,14 +37,15 @@ class UsersAdd extends Component {
         })
             .then(response => response.json())
             .then(json => console.log(json))
-            .then(() => this.setState({msg:'User has been added successfully'}))
+            .then(() => this.setState({msg: 'User has been added successfully'}))
     }
 
-    handleNameChange = (e) => this.setState({ name: e.target.value })
-    handleUsernameChange = (e) => this.setState({username: e.target.value })
-    handleEmailChange = (e) => this.setState({ email: e.target.value })
-    handlePhoneChange = (e) => this.setState({ phone: e.target.value })
-    handleWebsiteChange = (e) => this.setState({ website: e.target.value })
+    handleNameChange = (e) => this.setState({name: e.target.value})
+    handleUsernameChange = (e) => this.setState({username: e.target.value})
+    handleEmailChange = (e) => this.setState({email: e.target.value})
+    handlePhoneChange = (e) => this.setState({phone: e.target.value})
+    handleWebsiteChange = (e) => this.setState({website: e.target.value})
+
 
     render() {
         return (
@@ -54,7 +53,7 @@ class UsersAdd extends Component {
 
                 <h2>Update User</h2>
                 <div>
-                    <p>id: <span style={{fontStyle:'italic'}}>will be generated automatically</span></p>
+                    <p>id: <span style={{fontStyle: 'italic'}}>will be generated automatically</span></p>
                     <p>name: <input type="text" onChange={this.handleNameChange}/></p>
                     <p>username: <input type="text" onChange={this.handleUsernameChange}/></p>
                     <p>email: <input type="text" onChange={this.handleEmailChange}/></p>
@@ -63,7 +62,7 @@ class UsersAdd extends Component {
                 </div>
 
                 <div>
-                    <button onClick={()=>this.addHandler()}>Add User</button>
+                    <button onClick={() => this.addHandler()}>Add User</button>
                 </div>
                 <div>
                     <Link to={`/`}>

@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchUsers} from "../state/users";
 
+
 class UsersList extends Component {
     state = {}
 
@@ -31,7 +32,7 @@ class UsersList extends Component {
                 </div>
                 <div>
                     <Link to={`/users-add/`}>
-                    <button>Add new user</button>
+                        <button>Add new user</button>
                     </Link>
                 </div>
             </div>
