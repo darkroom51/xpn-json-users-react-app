@@ -11,21 +11,31 @@ class UsersList extends Component {
         this.props.getUsersData()
     }
 
+
+
     render() {
         return (
             <div>
-                {
-                    this.props.usersData
-                    &&
-                    this.props.usersData.map((el) => (
-                        <Link to={`/users-details/${el.id}`}  key={el.id}>
-                            <div style={{margin: '10px', padding: '10px'}}>
-                                {el.name} [id: {el.id}]
-                            </div>
-                        </Link>
-                    ))
-                }
+                <div>
+                    {
+                        this.props.usersData
+                        &&
+                        this.props.usersData.map((el) => (
+                            <Link to={`/users-details/${el.id}`} key={el.id}>
+                                <div style={{margin: '10px', padding: '10px'}}>
+                                    {el.name} [id: {el.id}]
+                                </div>
+                            </Link>
+                        ))
+                    }
+                </div>
+                <div>
+                    <Link to={`/users-add/`}>
+                    <button>Add new user</button>
+                    </Link>
+                </div>
             </div>
+
         )
     }
 }

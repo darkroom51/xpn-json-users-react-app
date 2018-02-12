@@ -36,6 +36,12 @@ class UsersDetails extends Component {
                     ))
                 }
                 <div>
+                    <Link to={`/users-update/${this.state.uid}`}>
+                        <button>Update User</button>
+                    </Link>
+                    <button>Delete User</button>
+                </div>
+                <div>
                     <Link to={`/`}>
                         <button>Back to users list</button>
                     </Link>

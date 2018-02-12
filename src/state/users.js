@@ -8,8 +8,7 @@ const setUsers = (users) => ({
 })
 
 export const fetchUsers = () => (dispatch, getState) => {
-    setTimeout( // this is only to slowly show "Ładowanie..."
-        () => fetch('http://jsonplaceholder.typicode.com/users')
+    fetch('http://jsonplaceholder.typicode.com/users')
             .then(response => response.json())
             .then(data => {
                 dispatch(setUsers(data))
@@ -17,8 +16,7 @@ export const fetchUsers = () => (dispatch, getState) => {
             .catch(err => {
                 console.log(err)
             })
-        , 1000)
-    //dispatch(setUsers(Object.entries(snapshot.val()) || {}))
+
 }
 
 
