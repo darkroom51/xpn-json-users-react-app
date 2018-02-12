@@ -20,7 +20,7 @@ class UsersList extends Component {
                     this.props.usersData.map((el) => (
                         <Link to={`/users-details/${el.id}`}  key={el.id}>
                             <div style={{margin: '10px', padding: '10px'}}>
-                                {el.id}. {el.name} [nick: {el.username}]
+                                {el.name} [id: {el.id}]
                             </div>
                         </Link>
                     ))
