@@ -6,11 +6,19 @@ import {fetchUsers} from "../state/users";
 
 class UsersDetails extends Component {
     state = {
-        uid : this.props.match.params.uid
+        uid : this.props.match.params.uid,
+        msg : ''
     }
 
     componentWillMount() {
         this.props.getUsersData()
+    }
+
+    deleteHandler = (id) => {
+        fetch(`https://jsonplaceholder.typicode.com/users/${id}`,
+            {method: 'DELETE'})
+            .then(() => this.setState({msg:'User has been deleted successfully'}))
+            .catch((err) => this.setState({msg:'Error while deleting user'}))
     }
 
     render() {
@@ -39,12 +47,15 @@ class UsersDetails extends Component {
                     <Link to={`/users-update/${this.state.uid}`}>
                         <button>Update User</button>
                     </Link>
-                    <button>Delete User</button>
+                    <button onClick={()=>this.deleteHandler(this.state.uid)}>Delete User</button>
                 </div>
                 <div>
                     <Link to={`/`}>
                         <button>Back to users list</button>
                     </Link>
+                </div>
+                <div>
+                    <h3>{this.state.msg}</h3>
                 </div>
             </div>
         )
