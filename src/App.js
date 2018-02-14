@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import {BrowserRouter, Route} from 'react-router-dom'
+import {Grid, Row, Col, PageHeader} from 'react-bootstrap'
 
 import UsersList from './components/UsersList'
 import UsersDetails from './components/UsersDetails'
@@ -15,12 +16,21 @@ class App extends Component {
         return (
             <Provider store={store}>
                 <BrowserRouter>
-                    <div>
-                        <Route path="/" exact={true} component={UsersList}/>
-                        <Route path="/users-details/:uid/" component={UsersDetails}/>
-                        <Route path="/users-update/:uid/" component={UsersUpdate}/>
-                        <Route path="/users-add/" component={UsersAdd}/>
-                    </div>
+                    <Grid>
+                        <Row>
+                            <Col>
+                                <PageHeader style={{textAlign:'center'}}>Users Management</PageHeader>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <Route path="/" exact={true} component={UsersList}/>
+                                <Route path="/users-details/:uid/" component={UsersDetails}/>
+                                <Route path="/users-update/:uid/" component={UsersUpdate}/>
+                                <Route path="/users-add/" component={UsersAdd}/>
+                            </Col>
+                        </Row>
+                    </Grid>
                 </BrowserRouter>
             </Provider>
         );

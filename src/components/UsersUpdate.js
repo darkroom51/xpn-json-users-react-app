@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import {Button, Panel, Alert, ControlLabel, FormControl} from 'react-bootstrap';
 
 import {connect} from 'react-redux'
 import {fetchUsers} from "../state/users";
@@ -61,30 +62,36 @@ class UsersUpdate extends Component {
 
     render() {
         return (
-            <div>
-
-                <h2>Update User</h2>
-                <div>
-                    <p>id: <input type="text" value={this.state.id} disabled={true} readOnly={true}/></p>
-                    <p>name: <input type="text" onChange={this.handleNameChange} value={this.state.name}/></p>
-                    <p>username: <input type="text" onChange={this.handleUsernameChange} value={this.state.username}/></p>
-                    <p>email: <input type="text" onChange={this.handleEmailChange} value={this.state.email}/></p>
-                    <p>phone: <input type="text" onChange={this.handlePhoneChange} value={this.state.phone}/></p>
-                    <p>website: <input type="text" onChange={this.handleWebsiteChange} value={this.state.website}/></p>
-                </div>
-
-                <div>
-                    <button onClick={() => this.updateHandler(this.state.uid)}>Update User</button>
-                </div>
-                <div>
+            <Panel>
+                <Panel.Heading>Update user</Panel.Heading>
+                <Panel.Body>
+                    {this.state.msg ?
+                        <Alert>{this.state.msg}</Alert>
+                        :
+                        null
+                    }
+                    <div>
+                        <ControlLabel>Id</ControlLabel>
+                        <FormControl type="text" value={this.state.id} disabled={true} readOnly={true} />
+                        <ControlLabel>Name</ControlLabel>
+                        <FormControl type="text" onChange={this.handleNameChange} value={this.state.name} />
+                        <ControlLabel>Username</ControlLabel>
+                        <FormControl type="text" onChange={this.handleUsernameChange} value={this.state.username} />
+                        <ControlLabel>Email</ControlLabel>
+                        <FormControl type="text" onChange={this.handleEmailChange} value={this.state.email} />
+                        <ControlLabel>Phone</ControlLabel>
+                        <FormControl type="text" onChange={this.handlePhoneChange} value={this.state.phone} />
+                        <ControlLabel>Website</ControlLabel>
+                        <FormControl type="text" onChange={this.handleWebsiteChange} value={this.state.website} />
+                    </div>
+                </Panel.Body>
+                <Panel.Footer>
                     <Link to={`/users-details/${this.state.uid}`}>
-                        <button>Back to user details</button>
+                        <Button>Back to user details</Button>
                     </Link>
-                </div>
-                <div>
-                    <h3>{this.state.msg}</h3>
-                </div>
-            </div>
+                    <Button bsStyle="primary" onClick={() => this.updateHandler(this.state.uid)}>Update User</Button>
+                </Panel.Footer>
+            </Panel>
 
         )
     }

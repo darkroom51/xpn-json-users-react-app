@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-
-import {Button, ListGroup, ListGroupItem} from 'react-bootstrap'
+import {Button, ListGroup, ListGroupItem, Panel} from 'react-bootstrap'
 
 import {connect} from 'react-redux'
 import {fetchUsers} from "../state/users";
@@ -18,27 +17,29 @@ class UsersList extends Component {
 
     render() {
         return (
-            <div>
-                <div>
-                    {
-                        this.props.usersData
-                        &&
-                        this.props.usersData.map((el) => (
-                            <Link to={`/users-details/${el.id}`} key={el.id}>
-                                <div style={{margin: '10px', padding: '10px'}}>
-                                    {el.name} [id: {el.id}]
-                                </div>
-                            </Link>
-                        ))
-                    }
-                </div>
-                <div>
+            <Panel>
+                <Panel.Heading>All users</Panel.Heading>
+                <Panel.Body>
+                    <ListGroup>
+                        {
+                            this.props.usersData
+                            &&
+                            this.props.usersData.map((el) => (
+                                //<Link to={`/users-details/${el.id}`}  style={{textDecoration: 'none'}}>
+                                    <ListGroupItem href={"#"} key={el.id} onClick={() => {this.props.history.push(`/users-details/${el.id}`)}}>
+                                        id: {el.id} &middot; {el.name}
+                                    </ListGroupItem>
+                                //</Link>
+                            ))
+                        }
+                    </ListGroup>
+                </Panel.Body>
+                <Panel.Footer>
                     <Link to={`/users-add/`}>
                         <Button bsStyle="primary">Add new user</Button>
                     </Link>
-                </div>
-            </div>
-
+                </Panel.Footer>
+            </Panel>
         )
     }
 }

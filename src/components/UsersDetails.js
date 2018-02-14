@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
+import {Button, Panel, Alert} from 'react-bootstrap'
 
 import {connect} from 'react-redux'
 import {fetchUsers} from "../state/users";
@@ -27,41 +28,44 @@ class UsersDetails extends Component {
 
     render() {
         return (
-            <div>
-                {
-                    this.props.usersData
-                    &&
-                    this.props.usersData
-                        .filter(el => +this.state.uid === el.id)
-                        .map(el => (
-                            <div key={el.id}>
-                                <h2>{el.name}</h2>
-                                <div>
-                                    <p>id: {el.id}</p>
-                                    <p>username: {el.username}</p>
-                                    <p>email: {el.email}</p>
-                                    <p>phone: {el.phone}</p>
-                                    <p>website: {el.website}</p>
-                                    <p>company: {el.company.name}</p>
+            <Panel>
+                <Panel.Heading>User details</Panel.Heading>
+                <Panel.Body>
+                    {this.state.msg ?
+                        <Alert>{this.state.msg}</Alert>
+                        :
+                        null
+                    }
+                    {
+                        this.props.usersData
+                        &&
+                        this.props.usersData
+                            .filter(el => +this.state.uid === el.id)
+                            .map(el => (
+                                <div key={el.id}>
+                                    <h2>{el.name}</h2>
+                                    <div>
+                                        <p>id: {el.id}</p>
+                                        <p>username: {el.username}</p>
+                                        <p>email: {el.email}</p>
+                                        <p>phone: {el.phone}</p>
+                                        <p>website: {el.website}</p>
+                                        <p>company: {el.company.name}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        ))
-                }
-                <div>
-                    <Link to={`/users-update/${this.state.uid}`}>
-                        <button>Edit User</button>
-                    </Link>
-                    <button onClick={() => this.deleteHandler(this.state.uid)}>Delete User</button>
-                </div>
-                <div>
+                            ))
+                    }
+                </Panel.Body>
+                <Panel.Footer>
                     <Link to={`/`}>
-                        <button>Back to users list</button>
+                        <Button>Back to users list</Button>
                     </Link>
-                </div>
-                <div>
-                    <h3>{this.state.msg}</h3>
-                </div>
-            </div>
+                    <Link to={`/users-update/${this.state.uid}`}>
+                        <Button bsStyle="primary">Edit User</Button>
+                    </Link>
+                    <Button bsStyle="danger" onClick={() => this.deleteHandler(this.state.uid)}>Delete User</Button>
+                </Panel.Footer>
+            </Panel>
         )
     }
 }

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import {Button, Panel, Alert, ControlLabel, FormControl} from 'react-bootstrap';
 
 import {connect} from 'react-redux'
 import {fetchUsers} from "../state/users";
@@ -49,30 +50,36 @@ class UsersAdd extends Component {
 
     render() {
         return (
-            <div>
-
-                <h2>Update User</h2>
-                <div>
-                    <p>id: <span style={{fontStyle: 'italic'}}>will be generated automatically</span></p>
-                    <p>name: <input type="text" onChange={this.handleNameChange}/></p>
-                    <p>username: <input type="text" onChange={this.handleUsernameChange}/></p>
-                    <p>email: <input type="text" onChange={this.handleEmailChange}/></p>
-                    <p>phone: <input type="text" onChange={this.handlePhoneChange}/></p>
-                    <p>website: <input type="text" onChange={this.handleWebsiteChange}/></p>
-                </div>
-
-                <div>
-                    <button onClick={() => this.addHandler()}>Add User</button>
-                </div>
-                <div>
+            <Panel>
+                <Panel.Heading>Add new user</Panel.Heading>
+                <Panel.Body>
+                    {this.state.msg ?
+                        <Alert>{this.state.msg}</Alert>
+                        :
+                        null
+                    }
+                    <div>
+                        <ControlLabel>Id</ControlLabel>
+                        <FormControl type="text" value={"will be generated automatically"} disabled={true} readOnly={true} />
+                        <ControlLabel>Name</ControlLabel>
+                        <FormControl type="text" onChange={this.handleNameChange} />
+                        <ControlLabel>Username</ControlLabel>
+                        <FormControl type="text" onChange={this.handleUsernameChange} />
+                        <ControlLabel>Email</ControlLabel>
+                        <FormControl type="text" onChange={this.handleEmailChange} />
+                        <ControlLabel>Phone</ControlLabel>
+                        <FormControl type="text" onChange={this.handlePhoneChange} />
+                        <ControlLabel>Website</ControlLabel>
+                        <FormControl type="text" onChange={this.handleWebsiteChange} />
+                    </div>
+                </Panel.Body>
+                <Panel.Footer>
                     <Link to={`/`}>
-                        <button>Back to users list</button>
+                        <Button>Back to users list</Button>
                     </Link>
-                </div>
-                <div>
-                    <h3>{this.state.msg}</h3>
-                </div>
-            </div>
+                    <Button bsStyle="primary" onClick={() => this.addHandler()}>Add User</Button>
+                </Panel.Footer>
+            </Panel>
 
         )
     }
