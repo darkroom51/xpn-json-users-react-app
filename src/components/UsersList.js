@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+
+import {Button, ListGroup, ListGroupItem} from 'react-bootstrap'
 
 import {connect} from 'react-redux'
 import {fetchUsers} from "../state/users";
@@ -32,7 +34,7 @@ class UsersList extends Component {
                 </div>
                 <div>
                     <Link to={`/users-add/`}>
-                        <button>Add new user</button>
+                        <Button bsStyle="primary">Add new user</Button>
                     </Link>
                 </div>
             </div>
