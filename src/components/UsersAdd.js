@@ -8,8 +8,6 @@ import {fetchUsers, setNewUser, postNewUser} from "../state/users";
 
 class UsersAdd extends Component {
     state = {
-        msg: '',
-
         name: null,
         username: null,
         email: null,

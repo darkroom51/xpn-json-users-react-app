@@ -8,8 +8,7 @@ import {fetchUsers, setUpdatedUser, patchUser} from "../state/users";
 
 class UsersUpdate extends Component {
     state = {
-        uid: this.props.match.params.uid,
-        msg: ''
+        uid: this.props.match.params.uid
     }
 
 

@@ -8,12 +8,11 @@ import {fetchUsers, deleteUser} from "../state/users";
 
 class UsersDetails extends Component {
     state = {
-        uid: this.props.match.params.uid,
-        msg: ''
+        uid: this.props.match.params.uid
     }
 
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.getUsersData()
     }
 
