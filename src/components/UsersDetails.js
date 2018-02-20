@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import {Button, Panel, Alert} from 'react-bootstrap'
 
 import {connect} from 'react-redux'
-import {fetchUsers} from "../state/users";
+import {fetchUsers, deleteUser} from "../state/users";
 
 
 class UsersDetails extends Component {
@@ -17,12 +17,16 @@ class UsersDetails extends Component {
         this.props.getUsersData()
     }
 
+    // deleteHandler = (id) => {
+    //     fetch(`https://jsonplaceholder.typicode.com/users/${id}`,
+    //         {method: 'DELETE'})
+    //         .then(response => response.json())
+    //         .then(json => console.log(json))
+    //         .then(() => this.setState({msg: 'User has been deleted successfully'}))
+    // }
+
     deleteHandler = (id) => {
-        fetch(`https://jsonplaceholder.typicode.com/users/${id}`,
-            {method: 'DELETE'})
-            .then(response => response.json())
-            .then(json => console.log(json))
-            .then(() => this.setState({msg: 'User has been deleted successfully'}))
+        this.props.deleteUser(id)
     }
 
 
@@ -31,8 +35,8 @@ class UsersDetails extends Component {
             <Panel>
                 <Panel.Heading>User details</Panel.Heading>
                 <Panel.Body>
-                    {this.state.msg ?
-                        <Alert>{this.state.msg}</Alert>
+                    {this.props.msg ?
+                        <Alert>{this.props.msg}</Alert>
                         :
                         null
                     }
@@ -71,11 +75,13 @@ class UsersDetails extends Component {
 }
 
 const mapStateToProps = state => ({
-    usersData: state.users.usersData
+    usersData: state.users.usersData,
+    msg: state.users.infoMsg
 })
 
 const mapDispatchToProps = dispatch => ({
-    getUsersData: () => dispatch(fetchUsers())
+    getUsersData: () => dispatch(fetchUsers()),
+    deleteUser: (id) => dispatch(deleteUser(id))
 })
 
 export default connect(

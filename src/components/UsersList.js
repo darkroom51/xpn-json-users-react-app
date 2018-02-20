@@ -10,7 +10,7 @@ class UsersList extends Component {
     state = {}
 
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.getUsersData()
     }
 

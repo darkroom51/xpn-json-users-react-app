@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {Button, Panel, Alert, ControlLabel, FormControl} from 'react-bootstrap';
 
 import {connect} from 'react-redux'
-import {fetchUsers} from "../state/users";
+import {fetchUsers, setNewUser, postNewUser} from "../state/users";
 
 
 class UsersAdd extends Component {
@@ -18,10 +18,27 @@ class UsersAdd extends Component {
     }
 
 
-    componentWillMount() {
-    }
+    // addHandler = (id) => {
+    //     const userObj = {
+    //         name: this.state.name,
+    //         username: this.state.username,
+    //         email: this.state.email,
+    //         phone: this.state.phone,
+    //         website: this.state.website
+    //     }
+    //     fetch('https://jsonplaceholder.typicode.com/users', {
+    //         method: 'POST',
+    //         body: JSON.stringify(userObj),
+    //         headers: {
+    //             "Content-type": "application/json; charset=UTF-8"
+    //         }
+    //     })
+    //         .then(response => response.json())
+    //         .then(json => console.log(json))
+    //         .then(() => this.setState({msg: 'User has been added successfully'}))
+    // }
 
-    addHandler = (id) => {
+    addHandler = () => {
         const userObj = {
             name: this.state.name,
             username: this.state.username,
@@ -29,16 +46,8 @@ class UsersAdd extends Component {
             phone: this.state.phone,
             website: this.state.website
         }
-        fetch('https://jsonplaceholder.typicode.com/users', {
-            method: 'POST',
-            body: JSON.stringify(userObj),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        })
-            .then(response => response.json())
-            .then(json => console.log(json))
-            .then(() => this.setState({msg: 'User has been added successfully'}))
+        this.props.setNewUser(userObj);
+        this.props.postNewUser();
     }
 
     handleNameChange = (e) => this.setState({name: e.target.value})
@@ -53,8 +62,8 @@ class UsersAdd extends Component {
             <Panel>
                 <Panel.Heading>Add new user</Panel.Heading>
                 <Panel.Body>
-                    {this.state.msg ?
-                        <Alert>{this.state.msg}</Alert>
+                    {this.props.msg ?
+                        <Alert>{this.props.msg}</Alert>
                         :
                         null
                     }
@@ -86,11 +95,14 @@ class UsersAdd extends Component {
 }
 
 const mapStateToProps = state => ({
-    usersData: state.users.usersData
+    usersData: state.users.usersData,
+    msg: state.users.infoMsg
 })
 
 const mapDispatchToProps = dispatch => ({
-    getUsersData: () => dispatch(fetchUsers())
+    getUsersData: () => dispatch(fetchUsers()),
+    setNewUser: (newUser) => dispatch(setNewUser(newUser)),
+    postNewUser: () => dispatch(postNewUser())
 })
 
 export default connect(

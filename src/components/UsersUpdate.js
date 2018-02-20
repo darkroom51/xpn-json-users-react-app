@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {Button, Panel, Alert, ControlLabel, FormControl} from 'react-bootstrap';
 
 import {connect} from 'react-redux'
-import {fetchUsers} from "../state/users";
+import {fetchUsers, setUpdatedUser, patchUser} from "../state/users";
 
 
 class UsersUpdate extends Component {
@@ -32,6 +32,27 @@ class UsersUpdate extends Component {
             ))
     }
 
+    // updateHandler = (id) => {
+    //     const userObj = {
+    //         id: this.state.name,
+    //         name: this.state.name,
+    //         username: this.state.username,
+    //         email: this.state.email,
+    //         phone: this.state.phone,
+    //         website: this.state.website
+    //     }
+    //     fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
+    //         method: 'PATCH',
+    //         body: JSON.stringify(userObj),
+    //         headers: {
+    //             "Content-type": "application/json; charset=UTF-8"
+    //         }
+    //     })
+    //         .then(response => response.json())
+    //         .then(json => console.log(json))
+    //         .then(() => this.setState({msg: 'User has been updated successfully'}))
+    // }
+
     updateHandler = (id) => {
         const userObj = {
             id: this.state.name,
@@ -41,16 +62,8 @@ class UsersUpdate extends Component {
             phone: this.state.phone,
             website: this.state.website
         }
-        fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
-            method: 'PATCH',
-            body: JSON.stringify(userObj),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        })
-            .then(response => response.json())
-            .then(json => console.log(json))
-            .then(() => this.setState({msg: 'User has been updated successfully'}))
+        this.props.setUpdatedUser(userObj)
+        this.props.patchUser(id)
     }
 
     handleNameChange = (e) => this.setState({name: e.target.value})
@@ -65,8 +78,8 @@ class UsersUpdate extends Component {
             <Panel>
                 <Panel.Heading>Update user</Panel.Heading>
                 <Panel.Body>
-                    {this.state.msg ?
-                        <Alert>{this.state.msg}</Alert>
+                    {this.props.msg ?
+                        <Alert>{this.props.msg}</Alert>
                         :
                         null
                     }
@@ -98,11 +111,14 @@ class UsersUpdate extends Component {
 }
 
 const mapStateToProps = state => ({
-    usersData: state.users.usersData
+    usersData: state.users.usersData,
+    msg: state.users.infoMsg
 })
 
 const mapDispatchToProps = dispatch => ({
-    getUsersData: () => dispatch(fetchUsers())
+    getUsersData: () => dispatch(fetchUsers()),
+    setUpdatedUser: (updatedUser) => dispatch(setUpdatedUser(updatedUser)),
+    patchUser: (id) => dispatch(patchUser(id))
 })
 
 export default connect(
